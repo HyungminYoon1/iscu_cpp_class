@@ -10,6 +10,10 @@ int main() {
     Welcome to C++ Cafe!
 
     */
+    std::cout << "================================\n";
+    std::cout << "            C++ Kiosk\n";
+    std::cout << "================================\n\n";
+    std::cout << "Welcome to C++ Cafe!\n";
 
     return 0;
 }
