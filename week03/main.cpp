@@ -27,7 +27,47 @@ int main() {
 
 
     // 여기에 주문 처리 코드를 작성하세요.
+    while (menuNumber != 0) {
 
+        std::cout << "Select menu number: ";
+        std::cin >> menuNumber;
+
+        if (menuNumber == 0) {
+            break;
+        }
+
+        if (menuNumber < 1 || menuNumber > 3) {
+            std::cout << "Invalid menu number. Please try again.\n\n";
+            continue;
+        }
+
+        std::cout << "Quantity: ";
+        std::cin >> quantity;
+
+        if (quantity < 1) {
+            std::cout << "Invalid quantity number. Please try again.\n\n";
+            continue;
+        }
+
+        switch (menuNumber) {
+            case 1:
+                total += 3500 * quantity;
+                std::cout << "Added: Americano x " << quantity << "\n";
+                break;
+
+            case 2:
+                total += 5000 * quantity;
+                std::cout << "Added: Latte x " << quantity << "\n";
+                break;
+
+            case 3:
+                total += 4000 * quantity;
+                std::cout << "Added: Tea x " << quantity << "\n";
+                break;
+        }
+
+        std::cout << "Current total: " << total << " won\n\n";
+    }
 
     std::cout << "\nFinal total: " << total << " won\n";
     std::cout << "Thank you for visiting C++ Cafe!\n";
