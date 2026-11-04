@@ -18,15 +18,21 @@ struct Order {
 class Cart {
 public:
     void addOrder(const Order& order) {
-        // TODO 1: 수량이 0 이하라면 추가하지 않고 함수를 종료하세요.
-        //         정상적인 주문이라면 private 멤버 orders에 저장하세요.
+        // 수량이 0 이하라면 추가하지 않고 함수를 종료
+        if (order.quantity <=0) {
+            return;
+        }
+        // 정상적인 주문이라면 private 멤버 orders에 저장
+        orders.push_back(order);
     }
 
     int getTotal() const {
         int total = 0;
 
-        // TODO 2: orders의 각 주문을 읽어
-        //         (메뉴 가격 * 수량)을 total에 더하세요.
+        // orders의 각 주문을 읽어 (메뉴 가격 * 수량)을 total에 더한다.
+        for (const Order& order : orders) {
+            total += order.item.price * order.quantity;
+        }
 
         return total;
     }
@@ -34,8 +40,12 @@ public:
     void printReceipt() const {
         std::cout << "\nReceipt\n";
 
-        // TODO 3: orders의 각 주문에 대해
-        //         "Americano x 2 = 9000 won" 형식으로 출력하세요.
+        // orders의 각 주문에 대해 "Americano x 2 = 9000 won" 형식으로 출력
+        for (const Order& order : orders) {
+            std::cout << order.item.name << " x " 
+                      << order.quantity << " = " 
+                      << order.item.price * order.quantity << " won\n";
+        }
 
         std::cout << "Final total: " << getTotal() << " won\n";
         std::cout << "Thank you for visiting C++ Cafe!\n";
@@ -86,11 +96,12 @@ int main() {
             continue;
         }
 
-        // TODO 4: 메뉴 번호 1, 2, 3을 menu의 인덱스 0, 1, 2에 대응시키세요.
-        const MenuItem& selectedItem = menu[0];  // TODO: menu[0] 수정
+        // 메뉴 번호 1, 2, 3을 menu의 인덱스 0, 1, 2에 대응
+        const MenuItem& selectedItem = menu[menuNumber-1];
 
-        // TODO 5: selectedItem과 quantity로 Order를 만들어
-        //         Cart의 public 멤버 함수 addOrder()를 호출하세요.
+        // selectedItem과 quantity로 Order를 만들어 Cart의 public 멤버 함수 addOrder()를 호출하세요.
+        Order order{selectedItem, quantity};
+        cart.addOrder(order);
 
         std::cout << "Added: " << selectedItem.name
                   << " x " << quantity << "\n";
