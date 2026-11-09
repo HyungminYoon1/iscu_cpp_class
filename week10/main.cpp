@@ -17,14 +17,20 @@ struct Order {
 // 한 고객의 주문을 관리하는 장바구니
 class Cart {
 public:
-    // TODO 1: 고객 이름을 받는 생성자를 작성하세요.
+    // 고객 이름을 받는 생성자를 작성
     //         - 형태: Cart(const std::string& name)
     //         - 멤버 초기화 리스트로 customerName을 name 값으로 초기화하세요.
     //         - 생성자 본문에서 "[Log] Cart created for 고객이름" 로그를 출력하세요.
+    Cart(const std::string& name): customerName(name) {
+        std::cout << "[Log] Cart created for " << customerName << "\n";
+    }
 
-    // TODO 2: 소멸자를 작성하세요.
+    // 소멸자를 작성
     //         - 형태: ~Cart()
     //         - 소멸자 본문에서 "[Log] Cart destroyed for 고객이름" 로그를 출력하세요.
+    ~Cart() {
+        std::cout << "[Log] Cart destroyed for " << customerName << "\n";
+    }
 
     void addOrder(const Order& order) {
         if (order.quantity <= 0) {
@@ -80,9 +86,9 @@ int main() {
     std::string name = getCustomerName();
 
     {   // cart의 scope 시작
-        // TODO 3: 생성자를 직접 정의하면 기본 생성자가 자동으로 만들어지지 않습니다.
-        //         입력받은 name을 전달하여 Cart 객체를 생성하도록 수정하세요.
-        Cart cart;
+        // 생성자를 직접 정의하면 기본 생성자가 자동으로 만들어지지 않습니다.
+        // 입력받은 name을 전달하여 Cart 객체를 생성하도록 수정
+        Cart cart{name};
 
         int menuNumber = -1;
 
